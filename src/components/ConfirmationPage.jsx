@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import { OrderConfirmation } from './OrderConfirmation'; // Adjust the import path
-import { useParams } from "react-router-dom"; // Import useParams from react-router-dom
+import { useParams } from "react-router-dom";
+import OrderConfirmation from "./OrderConfirmation";
 
 function ConfirmationPage() {
   const [order, setOrder] = useState(null);
-  const { id: orderId } = useParams(); // Destructure 'id' from params using useParams
+  const { id: orderId } = useParams();
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -24,14 +24,10 @@ function ConfirmationPage() {
     return <div>Loading...</div>;
   }
 
-  // return <OrderConfirmation order={order} />;
   return (
     <div>
       <h1>Order Confirmation</h1>
-      <p>Name: {order.name}</p>
-      <p>Address: {order.address}</p>
-      <p>Items: {order.items.map((item) => item.item.name).join(", ")}</p>
-      <p>Order ID: {order.id}</p>
+      <OrderConfirmation order={order} />
     </div>
   );
 }
