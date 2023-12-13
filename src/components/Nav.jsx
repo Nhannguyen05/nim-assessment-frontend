@@ -9,9 +9,9 @@ function Nav() {
       <ul className={styles.navListLeft}>
         <li className={styles.navItem}>
           <Link
-            to="/"
+            to="/order"
             className={`${styles.navLink} ${
-              location.pathname === "/" && styles.active
+              location.pathname === "/order" && styles.active
             }`}
           >
             Order
