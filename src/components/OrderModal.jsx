@@ -11,8 +11,8 @@ function OrderModal({ order, setOrderModal }) {
   const navigate = useNavigate();
 
   const validateForm = () => {
-    // Validate phone number
-    const phoneRegex = /^[0-9()-]+$/;
+    // Validate phone number. User can enter digits, "(", ")", "-", " ", in any length, but it allows only 10 digits
+    const phoneRegex = /^(?=[\d ()-]*$)(?=(?:\D*\d){10}\D*$)[\d ()-]*$/;
     if (!phoneRegex.test(phone)) {
       setValidationErrors(
         "Invalid phone number format. Please use (XXX) XXX-XXXX."
@@ -40,10 +40,8 @@ function OrderModal({ order, setOrderModal }) {
 
       // Format phone number before sending to the server
       const formattedPhone = phone.replace(/[^\d]/g, ""); // Remove non-digit characters
-      const formattedPhoneNumber = `(${formattedPhone.slice(
-        0,
-        3
-      )}) ${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
+      const formattedPhoneNumber = `(${formattedPhone.slice(0, 3)})
+       ${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`; // Convert input phone number to (XXX) XXX-XXXX format
 
       const response = await fetch("/api/orders", {
         method: "POST",
