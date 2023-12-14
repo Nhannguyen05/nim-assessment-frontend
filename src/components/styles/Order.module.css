@@ -88,3 +88,7 @@
   align-items: flex-end;
   width: 100%;
 }
+
+img {
+  width: 150px;
+}
