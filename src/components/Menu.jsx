@@ -3,7 +3,7 @@ import MenuItem from "./MenuItem";
 import styles from "./styles/Order.module.css";
 import { testMenuItems } from "../sampleTestData";
 
-function Menu({order, setOrder }) {
+function Menu({ order, setOrder }) {
   const addItemToOrder = (item) => {
     const newOrder = [...order];
     const itemInOrder = newOrder.find(

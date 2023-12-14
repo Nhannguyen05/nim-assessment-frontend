@@ -8,20 +8,21 @@ function OrderModal({ order, setOrderModal }) {
   const [address, setAddress] = useState("");
   const [validationErrors, setValidationErrors] = useState(null);
 
-
   const navigate = useNavigate();
 
   const validateForm = () => {
     // Validate phone number
     const phoneRegex = /^[0-9()-]+$/;
     if (!phoneRegex.test(phone)) {
-      setValidationErrors('Invalid phone number format. Please use (XXX) XXX-XXXX.');
+      setValidationErrors(
+        "Invalid phone number format. Please use (XXX) XXX-XXXX."
+      );
       return false;
     }
 
     // Validate all fields are filled out
     if (!name || !phone || !address) {
-      setValidationErrors('Please fill out all fields.');
+      setValidationErrors("Please fill out all fields.");
       return false;
     }
 
@@ -31,46 +32,48 @@ function OrderModal({ order, setOrderModal }) {
   };
 
   const placeOrder = async () => {
-      try {
-
-        // Validate the form
+    try {
+      // Validate the form
       if (!validateForm()) {
         return; // Do not submit data if validation fails
       }
 
       // Format phone number before sending to the server
-      const formattedPhone = phone.replace(/[^\d]/g, ''); // Remove non-digit characters
-      const formattedPhoneNumber = `(${formattedPhone.slice(0, 3)}) ${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
+      const formattedPhone = phone.replace(/[^\d]/g, ""); // Remove non-digit characters
+      const formattedPhoneNumber = `(${formattedPhone.slice(
+        0,
+        3
+      )}) ${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`;
 
-        const response = await fetch("/api/orders", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            name,
-            phone: formattedPhoneNumber,
-            address,
-            items: order
-          })
-        });
-        const data = await response.json();
-        console.log(data);
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          phone: formattedPhoneNumber,
+          address,
+          items: order
+        })
+      });
+      const data = await response.json();
+      console.log(data);
 
-        if (response.status === 200) {
-          const orderId = response.data.id;
+      if (response.status === 200) {
+        const orderId = response.data.id;
 
-          // Navigate to the Confirmation Page with the extracted order ID
-          navigate(`/order-confirmation/${orderId}`);
+        // Navigate to the Confirmation Page with the extracted order ID
+        navigate(`/order-confirmation/${orderId}`);
 
-          // Optionally close the modal after placing the order
-          setOrderModal(false);
-        } else {
-          console.error("Unexpected response status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error submitting order:", error);
+        // Optionally close the modal after placing the order
+        setOrderModal(false);
+      } else {
+        console.error("Unexpected response status:", response.status);
       }
+    } catch (error) {
+      console.error("Error submitting order:", error);
+    }
   };
   return (
     <>
@@ -88,7 +91,7 @@ function OrderModal({ order, setOrderModal }) {
       />
       <div className={styles.orderModalContent}>
         <h2>Place Order</h2>
-       <div className={styles.validationErrors}>{validationErrors}</div>
+        <div className={styles.validationErrors}>{validationErrors}</div>
         <form className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name">
@@ -148,7 +151,6 @@ function OrderModal({ order, setOrderModal }) {
           </button>
         </div>
       </div>
-   
     </>
   );
 }

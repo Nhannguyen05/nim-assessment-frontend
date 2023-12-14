@@ -14,7 +14,17 @@ function Nav() {
               location.pathname === "/" && styles.active
             }`}
           >
-            Order
+            Main Page
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link
+            to="/order-confirmation/:id"
+            className={`${styles.navLink} ${
+              location.pathname === "/order-confirmation/:id" && styles.active
+            }`}
+          >
+            Your Order
           </Link>
         </li>
       </ul>
