@@ -1,24 +1,24 @@
 .confirmation {
-    position: relative;
-    left: 32%;
-    right: 32%;
-    width: 500px;
-    height: 300px;
-    margin: 10px;
-    padding: 25px;
-    border: 5px solid black;
-    align-items: center;
-    margin-top: 2em;
-    text-align: center;
-    z-index: 1;
-    background-color: white;
-  }
-  
-  .page {
-    background: url(https://previews.123rf.com/images/sabelskaya/sabelskaya1708/sabelskaya170801104/84405045-vector-fast-food-template-burger-pizza-slice-roll-doner-kebab-potato-fry-sandwich-donut-flat-cartoon.jpg)
-      no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+  position: relative;
+  left: 32%;
+  right: 32%;
+  width: 500px;
+  height: 300px;
+  margin: 10px;
+  padding: 25px;
+  border: 5px solid black;
+  align-items: center;
+  margin-top: 2em;
+  text-align: center;
+  z-index: 1;
+  background-color: white;
+}
+
+.page {
+  background: url(https://previews.123rf.com/images/sabelskaya/sabelskaya1708/sabelskaya170801104/84405045-vector-fast-food-template-burger-pizza-slice-roll-doner-kebab-potato-fry-sandwich-donut-flat-cartoon.jpg)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

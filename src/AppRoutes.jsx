@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
 import ConfirmationPage from "./components/ConfirmationPage";
 
-
 function AppRoutes() {
   return (
     <Routes>
