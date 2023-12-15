@@ -13,6 +13,14 @@ function OrderModal({ order, setOrderModal }) {
   const validateForm = () => {
     // Validate phone number. User can enter digits, "(", ")", "-", " ", in any length, but it allows only 10 digits
     const phoneRegex = /^(?=[\d ()-]*$)(?=(?:\D*\d){10}\D*$)[\d ()-]*$/;
+    
+       // Validate all fields are filled out
+    if (!name || !phone || !address) {
+        setValidationErrors("Please fill out all fields.");
+        return false;
+      }
+  
+    
     if (!phoneRegex.test(phone)) {
       setValidationErrors(
         "Invalid phone number format. Please use (XXX) XXX-XXXX."
@@ -20,12 +28,7 @@ function OrderModal({ order, setOrderModal }) {
       return false;
     }
 
-    // Validate all fields are filled out
-    if (!name || !phone || !address) {
-      setValidationErrors("Please fill out all fields.");
-      return false;
-    }
-
+ 
     // Reset error if validation passes
     setValidationErrors(null);
     return true;
