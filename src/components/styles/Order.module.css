@@ -17,12 +17,15 @@
   overflow-y: hidden;
   text-align: center;
   padding-bottom: 90px;
+  background-color: #ffffff;
 }
 
 .subContainer h2 {
+  color: aliceblue;
   font-weight: 600;
   margin-bottom: 20px;
   text-align: center;
+  background-color: blueviolet;
 }
 
 .menu {
@@ -65,6 +68,7 @@
 .order h3 {
   align-self: flex-end;
   margin-top: 20px;
+  margin-right: 20px;
 }
 
 .order li {
@@ -87,4 +91,8 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+}
+
+img {
+  width: 150px;
 }

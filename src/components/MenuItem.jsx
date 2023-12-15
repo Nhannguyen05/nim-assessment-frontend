@@ -6,6 +6,8 @@ function MenuItem({ item, addItemToOrder }) {
       <h3>{item.name}</h3>
       <p>{item.description}</p>
       <p>${item.price}</p>
+      <img src={item.image} alt="Description of the {item.name}" />
+      <br />
 
       <button
         className="small-button"

@@ -1,8 +1,10 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import styles from "./styles/Order.module.css";
+import { testMenuItems } from "../sampleTestData";
 
-function Menu({ menuItems, order, setOrder }) {
+
+function Menu({ order, setOrder }) {
   const addItemToOrder = (item) => {
     const newOrder = [...order];
     const itemInOrder = newOrder.find(
@@ -21,7 +23,7 @@ function Menu({ menuItems, order, setOrder }) {
         <h2>Menu</h2>
       </div>
       <div className={styles.menu}>
-        {menuItems.map((item) => (
+        {testMenuItems.map((item) => (
           <MenuItem key={item.id} item={item} addItemToOrder={addItemToOrder} />
         ))}
       </div>
