@@ -6,11 +6,43 @@ function OrderModal({ order, setOrderModal }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [validationErrors, setValidationErrors] = useState(null);
 
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    // Validate phone number. User can enter digits, "(", ")", "-", " ", in any length, but it allows only 10 digits
+    const phoneRegex = /^(?=[\d ()-]*$)(?=(?:\D*\d){10}\D*$)[\d ()-]*$/;
+    if (!phoneRegex.test(phone)) {
+      setValidationErrors(
+        "Invalid phone number format. Please use (XXX) XXX-XXXX."
+      );
+      return false;
+    }
+
+    // Validate all fields are filled out
+    if (!name || !phone || !address) {
+      setValidationErrors("Please fill out all fields.");
+      return false;
+    }
+
+    // Reset error if validation passes
+    setValidationErrors(null);
+    return true;
+  };
+
   const placeOrder = async () => {
     try {
+      // Validate the form
+      if (!validateForm()) {
+        return; // Do not submit data if validation fails
+      }
+
+      // Format phone number before sending to the server
+      const formattedPhone = phone.replace(/[^\d]/g, ""); // Remove non-digit characters
+      const formattedPhoneNumber = `(${formattedPhone.slice(0, 3)})
+       ${formattedPhone.slice(3, 6)}-${formattedPhone.slice(6)}`; // Convert input phone number to (XXX) XXX-XXXX format
+
       const response = await fetch("/api/orders", {
         method: "POST",
         headers: {
@@ -18,7 +50,7 @@ function OrderModal({ order, setOrderModal }) {
         },
         body: JSON.stringify({
           name,
-          phone,
+          phone: formattedPhoneNumber,
           address,
           items: order
         })
@@ -57,6 +89,7 @@ function OrderModal({ order, setOrderModal }) {
       />
       <div className={styles.orderModalContent}>
         <h2>Place Order</h2>
+        <div className={styles.validationErrors}>{validationErrors}</div>
         <form className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="name">

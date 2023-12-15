@@ -10,7 +10,6 @@ const page = {
   color: "white"
 };
 
-
 function Main() {
   const [menuItems, setMenuItems] = useState([]);
   const [order, setOrder] = useState([]);

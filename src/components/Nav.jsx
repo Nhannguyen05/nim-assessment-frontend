@@ -15,7 +15,7 @@ function Nav() {
             }`}
           >
             Main Page
-          </Link>        
+          </Link>
         </li>
 
         <li className={styles.navItem}>
@@ -28,7 +28,6 @@ function Nav() {
             Your Order
           </Link>
         </li>
-
       </ul>
     </nav>
   );
