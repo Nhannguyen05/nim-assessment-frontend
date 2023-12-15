@@ -26,6 +26,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 101;
+  background-color: hsla(330, 4%, 10%, 0.999);
 }
 
 .orderModalContent h2 {
