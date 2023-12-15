@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles/OrderModal.module.css";
 
 function OrderModal({ order, setOrderModal }) {
@@ -6,21 +7,39 @@ function OrderModal({ order, setOrderModal }) {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
+  const navigate = useNavigate();
+
   const placeOrder = async () => {
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,
-        phone,
-        address,
-        items: order
-      })
-    });
-    const data = await response.json();
-    console.log(data);
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          address,
+          items: order
+        })
+      });
+      const data = await response.json();
+      console.log(data);
+
+      if (response.status === 200) {
+        const orderId = response.data.id;
+
+        // Navigate to the Confirmation Page with the extracted order ID
+        navigate(`/order-confirmation/${orderId}`);
+
+        // Optionally close the modal after placing the order
+        setOrderModal(false);
+      } else {
+        console.error("Unexpected response status:", response.status);
+      }
+    } catch (error) {
+      console.error("Error submitting order:", error);
+    }
   };
   return (
     <>
@@ -73,7 +92,7 @@ function OrderModal({ order, setOrderModal }) {
                   e.preventDefault();
                   setAddress(e.target.value);
                 }}
-                type="phone"
+                type="text"
                 id="address"
               />
             </label>
